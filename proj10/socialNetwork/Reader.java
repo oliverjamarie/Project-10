@@ -9,7 +9,7 @@ public class Reader {
 	private ArrayList<String> commands = new ArrayList<String>();
 	private BufferedReader in;
 	public Reader () throws IOException{
-		in = new BufferedReader (new FileReader("example-friend-data.html"));
+		in = new BufferedReader (new FileReader("///E:/Projects/Project-10/proj10/example-friend-data.html"));
 	}
 
 	private void process() throws IOException{
@@ -17,10 +17,6 @@ public class Reader {
 
 		while ((s= in.readLine()) != null) {
 			commands.add(s);
-		}
-
-		for (String msg: commands) {
-			System.out.println(msg);
 		}
 	}
 
