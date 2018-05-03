@@ -41,8 +41,9 @@ public class CommandReader{
 	public CommandReader() {
 		commandList= new ArrayList<Command>();
 	}
-
-	public void processCommands () throws IOException {
+	
+	//Reads the inputs from the Reader class and loads them into Command Objects
+	public void readCommands () throws IOException {
 		Reader read = new Reader();
 		ArrayList<String> inputs = read.getInputs();
 
@@ -56,7 +57,9 @@ public class CommandReader{
 			}
 		}
 	}
-
+	
+	
+	//returns the list of the users' names
 	private ArrayList<String> getNames(String in, int max){
 		ArrayList<String> names = new ArrayList<String>();
 		int size = in.length();
@@ -92,14 +95,11 @@ public class CommandReader{
 		CommandReader read = new CommandReader();
 
 		try {
-			read.processCommands();
+			read.readCommands();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		for (Command com: read.getCommands()) {
-			System.out.println(com);
-		}
 	}
 
 }
