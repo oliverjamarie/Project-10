@@ -20,6 +20,20 @@ public class CommandReader{
 			users.addAll(userIn);
 			this.maxNumUsers = maxNumUsers;
 		}
+		
+		public String toString() {
+			String msg = new String();
+			
+			msg += command + "\n";
+			
+			for (String name: users) {
+				msg += name + "\t";
+			}
+			
+			msg += "\n";
+			
+			return msg;
+		}
 	}
 
 	private ArrayList<Command> commandList;
@@ -34,8 +48,8 @@ public class CommandReader{
 
 		for (String msg: inputs) {
 			if (msg.contains("addperson")) {
-				/*Command c = new Command("addPerson",getNames(msg,1),1);
-				commandList.add(c);*/
+				Command c = new Command("addPerson",getNames(msg,1),1);
+				commandList.add(c);
 			}else if (msg.contains("addfriend")) {
 				Command c = new Command("addFriend",getNames(msg,2),2);
 				commandList.add(c);
@@ -49,28 +63,23 @@ public class CommandReader{
 		int count = 0;
 		boolean foundName = false;
 		String name = new  String();
-
+		
 		for (int i = 0; i < size; i ++) {
+			char c = in.charAt(i);
+			
 			if (count <=max) {
-				char c = in.charAt(i);
-
-				if (c == ' ' && i > 0) { // Trigger for foundName
+				if (c == ' ') { // Trigger for foundName
 					if (!foundName) {
 						foundName = true;
-					}else {
+					}else  if (count >= 0){
 						names.add(name);
 						name = new String();
-						foundName = false;
 						count ++;
 					}
 				}else if (foundName) {
 					name += c;
 				}
 			}
-		}
-		
-		for (String msg : names) {
-			System.out.println(msg);
 		}
 		return names;
 	}
@@ -86,6 +95,10 @@ public class CommandReader{
 			read.processCommands();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		
+		for (Command com: read.getCommands()) {
+			System.out.println(com);
 		}
 	}
 
