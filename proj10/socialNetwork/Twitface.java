@@ -2,35 +2,45 @@ package socialNetwork;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class Twitface {
 
-  public boolean addUser(String name) {
-    throw new UnsupportedOperationException("You must write this method.");
-  }
+	private Graph <String> network;
+	
+	public Twitface() {
+		network = new Graph <String>();
+	}
 
-  public Collection<String> getAllUsers() {
-    throw new UnsupportedOperationException("You must write this method.");
-  }
+	public boolean addUser(String name) {
+		return network.addVertexToGraph(name);
+	}
 
-  public boolean friend(String user1, String user2) {
-    throw new UnsupportedOperationException("You must write this method.");
-  }
+	public Collection<String> getAllUsers() {
+		return network.getVertices();
+	}
 
-  public Collection<String> getFriends(String user) {
-    throw new UnsupportedOperationException("You must write this method.");
-  }
+	public boolean friend(String user1, String user2) {
+		return network.addEdgeToGraph(user1, user2, 0);
+	}
 
-  public boolean unfriend(String user1, String user2) {
-    throw new UnsupportedOperationException("You must write this method.");
-  }
+	public Collection<String> getFriends(String user) {
+		return network.neighborsOfVertex(user);
+	}
 
-  public Collection<String> peopleYouMayKnow(String user) {
-    throw new UnsupportedOperationException("You must write this method.");
-  }
+	public boolean unfriend(String user1, String user2) {
+		return network.removeAllEdges(user1, user2);
+	}
 
-  public void readFriendData(List<String> urls) {
-    throw new UnsupportedOperationException("You must write this method.");
-  }
+	public Collection<String> peopleYouMayKnow(String user) {
+		//Set is an interface so this needs to be changes
+		Set<String> set = new Set <String> ();
+		
+		return set;
+	}
+
+	public void readFriendData(List<String> urls) {
+		throw new UnsupportedOperationException("You must write this method.");
+	}
 
 }
