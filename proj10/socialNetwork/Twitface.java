@@ -1,10 +1,12 @@
 package socialNetwork;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Twitface {
+public class Twitface implements Runnable{
 
 	private Graph <String> network;
 	
@@ -33,14 +35,27 @@ public class Twitface {
 	}
 
 	public Collection<String> peopleYouMayKnow(String user) {
-		//Set is an interface so this needs to be changes
-		Set<String> set = new Set <String> ();
+		Set<String> set = new HashSet <String> ();
+		
+		for (String msg : network.neighborsOfVertex(user)) {
+			if (!user.equals(msg)) {
+				set.add(msg);
+			}
+		}
 		
 		return set;
 	}
 
 	public void readFriendData(List<String> urls) {
-		throw new UnsupportedOperationException("You must write this method.");
+		List<Thread> threads = new ArrayList<Thread>();
+		
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
