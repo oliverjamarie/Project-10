@@ -46,7 +46,7 @@ public class Graph<V> {
 		return false;
 	}
 
-	public boolean addEdgeToGraph(V source, V dest, int weight) {
+	public boolean addDirectedEdgeToGraph(V source, V dest, int weight) {
 		Node<V> sourceNode = getNode(source);
 		Node<V> destinationNode = getNode(dest);
 
@@ -57,10 +57,25 @@ public class Graph<V> {
 		return false;
 	}
 
+	public boolean addUndirectedEdgeToGraph(V source, V dest, int weight) {
+		Node<V> sourceNode = getNode(source);
+		Node<V> destinationNode = getNode(dest);
+
+		if (sourceNode != null && destinationNode != null) {
+			return sourceNode.addEdge(destinationNode, weight) &&
+					destinationNode.addEdge(sourceNode, weight);
+		}
+
+		return false;
+	}
+
+
 	private Node<V> getNode(V data){
-		for (Node<V> vertex : vertices) {
-			if (vertex.getData().equals(data)) {
-				return vertex;
+		if (data != null) {
+			for (Node<V> vertex : vertices) {
+				if (vertex.getData().equals(data)) {
+					return vertex;
+				}
 			}
 		}
 		return null;
@@ -99,22 +114,22 @@ public class Graph<V> {
 	public boolean removeAllEdges(V source, V dest) {
 		Node<V> sourceNode = getNode(source);
 		Node<V> destNode = getNode(dest);
-		
+
 		if(sourceNode != null && destNode != null) {
 			return sourceNode.removeAllEdges(dest);
 		}
-		
+
 		return false;
 	}
 
 	public boolean removeEdge(V source, V dest, int weight) {
 		Node<V> sourceNode = getNode(source);
 		Node<V> destNode = getNode(dest);
-		
+
 		if(sourceNode != null || destNode != null) {
 			return sourceNode.removeEdge(dest, weight);
 		}
-		
+
 		return false;
 	}
 
@@ -127,7 +142,7 @@ public class Graph<V> {
 	}
 
 	public Collection<V> predecessorsOfVertex(V destVertex) {
-		Node<V> dest = getNode(destVertex);
+		//Node<V> dest = getNode(destVertex);
 		ArrayList<V> list = new ArrayList<V>();
 		for (Node<V> vertex: vertices) {
 			list.addAll(vertex.predecessorsOf(destVertex));
@@ -137,7 +152,7 @@ public class Graph<V> {
 
 	public String toString() {
 		int i = 0 ;
-		String msg = new  String();
+		String msg = new  String(); 
 		for (Node<V> vertex : vertices) {
 			i ++;
 			msg += i + "\t" + vertex.getData() + "\t" + vertex.toString() + "\n";
